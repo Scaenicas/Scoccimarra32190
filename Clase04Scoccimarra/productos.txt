@@ -10,11 +10,5 @@
     "price": 234.46,
     "thumbnail": "https://macoser.vteximg.com.br/arquivos/ids/156486-550-550/FX-82LAPLUS2-PK.jpg?v=637381310195230000",
     "id": 2
-  },
-  {
-    "title": "Carátula",
-    "price": 1.59,
-    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_614698-MLA31010482716_062019-O.jpg",
-    "id": 3
   }
 ]
