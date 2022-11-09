@@ -56,13 +56,13 @@ const contenedor = new Contenedor('productos.txt');
 
 app.get('/productos', (req, res) => {
     const result = contenedor.getAll();
-    res.send(result);
+    res.send(JSON.stringify(result));
 })
 
 app.get('/productoRandom', (req, res) => {
     const max = contenedor.getLength();
     const result = contenedor.getById(Math.floor(Math.random() * max +1))
-    res.send(result);
+    res.send(JSON.stringify(result));
 })
 
 app.listen(8080, () => {
