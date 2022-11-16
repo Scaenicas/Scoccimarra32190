@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios de Ingreso</title>
+</head>
+<body>
+    <br><hr>
+
+    <h2>Obtener todos los productos</h2>
+    <form action="/api/productos" method="GET">
+        <button>Obtener</button>
+    </form>
+
+    <br><hr>
+
+    <h2>Buscar producto por ID</h2>
+    <h3> Haga un GET a localhost:8080/api/productos/:id</h3>
+
+
+    <br><hr>
+
+    <h2>Ingresar nuevo producto nuevo</h2>
+    <form action="/api/productos" method="POST">
+        Nombre del producto: <input type="text" name="title"><br><br>
+        Precio: <input type= "number" name="price"><br><br>
+        URL imagen: <input type="text" name="thumbnail"><br><br>
+        <button>Enviar</button>
+    </form>
+
+    <br><hr>
+
+    <h2>Actualizar un producto existente</h2>
+    <h3> Haga un PUT a localhost:8080/api/productos/:id</h3>
+    <h4> Utilice los valores:<br><br>text: nombre del producto <br>price: precio <br>thumbnail: URL de la imagen del producto</h4>
+    <br><hr>
+
+    <h2>Eliminar producto</h2>
+    <h3> Haga un DELETE a localhost:8080/api/productos/:id</h3>
+
+</body>
+</html>
