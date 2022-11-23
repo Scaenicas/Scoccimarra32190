@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de productos cargados</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container mt-3">
+        <div class="jumbotron">
+            <h2 style="color:crimson;">Listado de productos</h2>
+                <div id="tabla"></div>
+        </div>
+    </div>
+    <form action="/" method="get">
+        <button class="btn btn-success mt-3 mb-5">Volver al formulario</button>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+    integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+    crossorigin="anonymous"></script>
+
+    <script>
+        
+        const archivo = 'productos.txt'
+        const fs = require('fs')
+        
+        fs.promises.readFile(archivo, 'utf-8')
+        .then(data => {
+            const productos = JSON.parse(data);
+            let tabla ="";
+            if(productos.length > 0)
+            {
+                const templateStr=`
+                <div class="table-responsive">
+                    <table class="table table-dark">
+                        <tr style="color: yellow;"> <th>Nombre</th> <th>Precio</th> <th>URL Imagen</th> </tr>
+                    </table>
+                </div>}`
+
+                for (const producto of productos)
+                {
+                    templateStr += `                
+                    <tr>
+                        <td>{{titulo}}</td>
+                        <td>{{precio}}</td>
+                        <td>{{url}}</td>
+                    </tr>`
+
+                    const template = Handlebars.compile(templateStr)
+
+                    const obj = {
+                        titulo : producto.title,
+                        precio : producto.price,
+                        url : producto.thumbnail
+                    }
+                    const html = template(obj)
+                    tabla+=html
+                }
+
+                document.getElementById('tabla').innerHTML = tabla
+            }
+            
+            else
+                document.getElementById('tabla').innerHTML = `<h3 class="alert alert-danger">No se encontraron datos</h3>`
+        })
+        .catch(err => 
+            {
+                tabla.innerHTML= `<h3 class="alert alert-danger">No se encontraron datos</h3>`
+            })
+    </script>
+
+</body>
+</html>
