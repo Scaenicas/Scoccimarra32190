@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "timestamp": 1670465519395,
+    "nombre": "Escuadra",
+    "descripcion": "Escuadra verde escolar",
+    "codigo": "UT458",
+    "thumbnail": "https://d3ugyf2ht6aenh.cloudfront.net/stores/819/149/products/diseno-sin-titulo-481-2c3209c6e47a7d175616465231776281-1024-1024.png",
+    "precio": 70,
+    "stock": 25
+  },
+  {
+    "id": 2,
+    "timestamp": 1670465589948,
+    "nombre": "Pelota Qatar2022",
+    "descripcion": "Pelota blanca Qatar2022",
+    "codigo": "PELQAT",
+    "thumbnail": "https://www.digitalsport.com.ar/files/products/624b1bc16431e-565339-1200x1200.jpg",
+    "precio": 4800,
+    "stock": 19
+  },
+  {
+    "id": 3,
+    "timestamp": 1670465589949,
+    "nombre": "Cuadernillo Duki",
+    "descripcion": "Cuardenillo A4 con foto de Duki en la tapa",
+    "codigo": "CUA25",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_874931-MLA41001993171_032020-O.jpg",
+    "precio": 450,
+    "stock": 3
+  }
+]
