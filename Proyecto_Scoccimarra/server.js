@@ -15,7 +15,7 @@ let administrador = true;
 
 //--------------------------------------------PRODUCTOS----------------------------------------------------
 
-let productos = new Productos("./public/productos.txt")
+let productos = new Productos("./public/productos.json")
 app.use('/api/productos', routerProductos)
 
 routerProductos.get('/:id?', (req, res) => 
@@ -63,7 +63,7 @@ routerProductos.get('*', (req, res) =>
 
 //-----------------------------------------------CARRITOS--------------------------------------------------
 
-let carritos = new Carritos("./public/carritos.txt")
+let carritos = new Carritos("./public/carritos.json")
 app.use('/api/carrito', routerCarritos)
 
 routerCarritos.post('/', (req, res) => {
