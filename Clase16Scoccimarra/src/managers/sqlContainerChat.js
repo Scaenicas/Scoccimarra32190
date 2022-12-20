@@ -5,28 +5,35 @@ class ContenedorChatSQL {
     constructor(options, nombreTabla) 
     {
         this.knex = knex(options)
+        this.nombreTabla = nombreTabla
 
         this.knex.schema.dropTableIfExists(nombreTabla)
         .finally(() => {
-                this.knex.schema.createTable('mensaje', table => {
+                this.knex.schema.createTable(nombreTabla, table => {
                 table.string('author', 50).notNullable()
                 table.dateTime('date').notNullable()
                 table.string('text',1000)
                 table.increments('id').primary()
-            })
+            }).then()
         })
     }
 
-    insertarMensajes(mensajes) {
-        return this.knex('articulos').insert(mensajes)
+    async insertarMensajes(mensajes) {
+        this.knex(this.nombreTabla).insert(mensajes)
+        .then(rows => {
+            let listado = []
+            for (const row of rows) {
+                listado.push(JSON.stringify(row))
+            }
+        })
     }
 
-    listarMensajes() {
-        return this.knex('mensajes').select('*')
+    async listarMensajes() {
+        return this.knex(this.nombreTabla).select('*')
     }
 
     borrarMensajes(id) {
-        return this.knex.from('mensajes').where('id', '=', id).del()
+        return this.knex.from(this.nombreTabla).where('id', '=', id).del()
     }
 
     close() {

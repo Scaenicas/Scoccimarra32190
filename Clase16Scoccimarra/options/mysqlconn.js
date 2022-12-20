@@ -1,4 +1,4 @@
-const options = {
+const optionsMySQL = {
     client: 'mysql',
     connection: {
         host: 'localhost',
@@ -8,6 +8,4 @@ const options = {
     }
 }
 
-export default {
-    options
-}
+export default optionsMySQL

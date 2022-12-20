@@ -5,42 +5,39 @@ class ContenedorSQL {
     constructor(options, nombreTabla) 
     {
         this.knex = knex(options)
+        this.nombreTabla = nombreTabla
 
         this.knex.schema.dropTableIfExists(nombreTabla)
         .finally(() => {
-                this.knex.schema.createTable('articulos', table => {
+                this.knex.schema.createTable(nombreTabla, table => {
                 table.string('title', 15).notNullable()
                 table.float('price', 10).notNullable()
                 table.string('thumbnail',100)
                 table.increments('id').primary()
-            })
+            }).then()
         })
     }
 
-    insertarArticulos(articulos) {
-        this.knex('articulos').insert(articulos)
+    async insertarArticulos(articulos) {
+        this.knex(this.nombreTabla).insert(articulos)
         .then(rows => {
             let listado = []
-            for (row of rows) {
+            for (const row of rows) {
                 listado.push(JSON.stringify(row))
             }
         })
-        this.knex.destroy()
     }
     
-    listarArticulos() {
-        return this.knex('articulos').select('*')
-        this.knex.destroy()
+    async listarArticulos() {
+        return this.knex(this.nombreTabla).select('*')
     }
 
     borrarArticulos(id) {
-        return this.knex.from('articulos').where('id', '=', id).del()
-        this.knex.destroy()
+        return this.knex.from(this.nombreTabla).where('id', '=', id).del()
     }
 
     actualizarStock(stock, id) {
-        return this.knex.from("articulos").where('id', '=', id).update({stock: stock})
-        this.knex.destroy()
+        return this.knex.from(this.nombreTabla).where('id1', '=', id).update({stock: stock})
     }
 
     close() {

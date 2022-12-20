@@ -14,7 +14,7 @@ import optionsSQLite from '../options/SQLiteconn.js';
 let container = new ContenedorSQL(optionsMySQL, "articulos");
 let chatContainer = new ContenedorChatSQL(optionsSQLite, "mensajes");
 
-const viewsFolder = join(__dirname,"views");
+const viewsFolder = join('./',"views");
 
 const app = express();
 
@@ -24,7 +24,7 @@ const server = app.listen(PORT, ()=>console.log(`Server Port ${PORT}`));
 
 app.use(json());
 app.use(urlencoded({extended: true}));
-app.use('/public', express.static('public'))
+app.use(express.static('public'))
 
 app.engine("handlebars", engine());
 
@@ -42,26 +42,26 @@ const io = new Server(server);
 io.on("connection", async(socket)=>{
     console.log("Nuevo cliente conectado");
     //Chat
-    const chat = await chatContainer.getAll();
+    const chat = await chatContainer.listarMensajes();
     socket.emit("messagesChat", chat);
 
     //Products
-    const products = container.listarArticulos();
+    const products = await container.listarArticulos();
     socket.emit("products", products);
 
     //Recibir msg
     socket.on("newMsg", async(data)=>{
-        await chatContainer.save(data)
-        //enviar los mensajes a todos los socket conecta2
-        const chat = await chatContainer.getAll();
+        await chatContainer.insertarMensajes(data)
+        //enviar los mensajes a todos los socket conectados
+        const chat = await chatContainer.listarMensajes();
         io.sockets.emit("messagesChat", chat)
     })
 
     //Recibir Producto
     socket.on("newProduct", async(data)=>{
-        await container.save(data)
+        await container.insertarArticulos(data)
         //Enviar productos actualizados
-        const products = await container.getAll();
+        const products = await container.listarArticulos();
         io.sockets.emit("products", products)
     })
 })

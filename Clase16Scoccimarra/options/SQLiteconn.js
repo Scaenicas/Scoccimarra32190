@@ -1,4 +1,4 @@
-const options = {
+const optionsSQLite = {
     client: 'sqlite3',
     connection: {
         filename: '../DB/ecommerce.sqlite'
@@ -6,6 +6,4 @@ const options = {
     useNullAsDefault: true
 }
 
-export default {
-    options
-}
+export default optionsSQLite
